@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+
+  ghost:
+    image: ghost:1-alpine
+    restart: always
+    ports:
+      - 8080:2368
+    environment:
+      
+      database__client: mysql
+      database__connection__host: db
+      database__connection__user: root
+      database__connection__password: example
+      database__connection__database: ghost
+   
+    volumes:
+                 -gh_storage_new:/var/lib/ghost/content
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: samyak@123
+      MYSQL_USER: samyak
+      MYSQL_PASSWORD: openmy@12
+      MYSQL_DATABASE: mydb
+    volumes:
+                 -mysql_storage_new:/var/lib/mysql
+volumes:
+           gh_storage_new:
+           mysql_storage_new:
